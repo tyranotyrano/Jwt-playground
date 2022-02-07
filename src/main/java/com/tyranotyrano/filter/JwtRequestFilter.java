@@ -32,6 +32,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String requestTokenHeader = request.getHeader("Authorization");
-        // TODO : Bearer Token 처리 추가할 것
+
+        if(requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")){
+            String jwtToken = requestTokenHeader.substring(7);
+        }
     }
 }
