@@ -23,4 +23,13 @@ public class Account {
     private String name;
 
     private String password;
+
+    private Account(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
+
+    public static Account of(String name, String password) {
+        return new Account(name, password);
+    }
 }
