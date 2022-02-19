@@ -33,10 +33,8 @@ public class JwtAuthenticationController {
     @PostMapping(value = "/api/v1/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) {
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-
         UserDetails userDetails = userDetailService.loadUserByUsername(authenticationRequest.getUsername());
-        String token = jwtTokenUtil.generateToken(userDetails);
-        ApiResponse response = ApiResponse.of("성공", token);
+        ApiResponse response = ApiResponse.of("성공", jwtTokenUtil.generateToken(userDetails));
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
