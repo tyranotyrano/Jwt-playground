@@ -33,15 +33,21 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) {
         String username = extractUserName(request.getHeader("Authorization"));
-        UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UsernamePasswordAuthenticationToken authentication =
-                new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+            UsernamePasswordAuthenticationToken authentication = buildAuthenticationToken(request, username);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+    }
+
+    private UsernamePasswordAuthenticationToken buildAuthenticationToken(HttpServletRequest request,
+                                                                         String username) {
+        UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+        UsernamePasswordAuthenticationToken authentication =
+            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+        return authentication;
     }
 
     private String extractUserName(String requestTokenHeader) {
