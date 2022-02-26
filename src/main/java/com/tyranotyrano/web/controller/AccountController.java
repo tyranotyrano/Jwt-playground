@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,5 +37,11 @@ public class AccountController {
     public ResponseEntity<ApiResponse> findAccount(@PathVariable("accountId") Long accountId) {
         Optional<Account> accountOpt = accountService.findById(accountId);
         return new ResponseEntity<>(ApiResponse.of("성공", accountOpt.orElse(null)), HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{accountId}")
+    public ResponseEntity<ApiResponse> deleteAccount(@PathVariable("accountId") Long accountId) {
+        accountService.deleteById(accountId);
+        return new ResponseEntity<>(ApiResponse.of("성공", HttpStatus.NO_CONTENT), HttpStatus.OK);
     }
 }
