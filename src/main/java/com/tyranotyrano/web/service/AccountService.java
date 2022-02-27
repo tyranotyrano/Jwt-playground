@@ -14,12 +14,9 @@ import com.tyranotyrano.dto.RegisterAccountRq;
 @Transactional(readOnly = true)
 public class AccountService {
     private final AccountRepository accountRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public AccountService(AccountRepository accountRepository,
-                          PasswordEncoder passwordEncoder) {
+    public AccountService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public void register(RegisterAccountRq rq) {
