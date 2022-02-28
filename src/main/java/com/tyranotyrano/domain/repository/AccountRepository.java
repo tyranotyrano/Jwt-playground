@@ -8,4 +8,5 @@ import com.tyranotyrano.domain.Account;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
     Optional<Account> findByName(String name);
+    boolean existsByName(String name);
 }

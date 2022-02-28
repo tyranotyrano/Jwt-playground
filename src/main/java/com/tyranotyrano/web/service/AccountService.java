@@ -2,7 +2,6 @@ package com.tyranotyrano.web.service;
 
 import java.util.Optional;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,5 +28,9 @@ public class AccountService {
 
     public void deleteById(Long id) {
         accountRepository.deleteById(id);
+    }
+
+    public boolean isExistName(String name) {
+        return accountRepository.existsByName(name);
     }
 }
