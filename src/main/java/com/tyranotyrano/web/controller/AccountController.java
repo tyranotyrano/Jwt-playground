@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,5 +44,10 @@ public class AccountController {
     public ResponseEntity<ApiResponse> deleteAccount(@PathVariable("accountId") Long accountId) {
         accountService.deleteById(accountId);
         return new ResponseEntity<>(ApiResponse.of("성공", HttpStatus.NO_CONTENT), HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/exist-name")
+    public ResponseEntity<ApiResponse> isExistName(@RequestParam String name) {
+        return new ResponseEntity<>(ApiResponse.of("성공", accountService.isExistName(name)), HttpStatus.OK);
     }
 }
