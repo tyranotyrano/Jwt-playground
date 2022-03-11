@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,18 +24,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String username;
+    private String email;
     private String password;
     private String roles;
 
-    private User(String username, String password, String roles) {
-        this.username = username;
+    private User(String email, String password, String roles) {
+        this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
-    public static User of(String username, String password, String roles) {
-        return new User(username, password, roles);
+    public static User of(String email, String password, String roles) {
+        return new User(email, password, roles);
     }
 
     public List<String> getRoles() {
