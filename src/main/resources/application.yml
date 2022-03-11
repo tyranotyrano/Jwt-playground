@@ -18,7 +18,10 @@ spring:
       hibernate:
         format_sql: true
 jwt:
+  header: Authorization
   secret: jwtsecretkey
+  access-token-validity-in-millisecond: 60000       # 1분
+  refresh-token-validity-in-millisecond: 300000  # 5분
 
 logging:
   level:
