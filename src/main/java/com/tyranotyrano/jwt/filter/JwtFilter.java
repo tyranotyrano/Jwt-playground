@@ -23,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class JwtFilter implements Filter {
     public static final String AUTHORIZATION_HEADER = "Authorization";
     public static final String BEARER_AUTHORIZATION_PREFIX = "Bearer ";
+    public static final int TOKEN_START_INDEX = 7;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final TokenProvider tokenProvider;
@@ -54,7 +55,7 @@ public class JwtFilter implements Filter {
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_AUTHORIZATION_PREFIX)) {
-            return bearerToken.substring(7);
+            return bearerToken.substring(TOKEN_START_INDEX);
         }
         return null;
     }

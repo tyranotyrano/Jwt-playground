@@ -49,6 +49,7 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
 
         http.authorizeRequests()
+            .mvcMatchers("/api/v1/auth/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .apply(new JwtSecurityConfigurerAdapter(tokenProvider));
@@ -63,7 +64,7 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("{hostURL:frontEndPort}");
+        configuration.addAllowedOrigin("*");
         configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*");
 

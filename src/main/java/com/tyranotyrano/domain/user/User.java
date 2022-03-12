@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class User {
+    private static final String COMMA = ",";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +41,7 @@ public class User {
 
     public List<String> getRoles() {
         if (this.roles.length() > 0) {
-            return Arrays.asList(this.roles.split(","));
+            return Arrays.asList(this.roles.split(COMMA));
         }
 
         return new ArrayList<>();
