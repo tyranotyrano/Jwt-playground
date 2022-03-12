@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
     @Transactional
     public User signup(SignUpDto signUpDto) {
         validateExistUser(signUpDto.getEmail());
-        User user = User.of(signUpDto.getEmail(), passwordEncoder.encode(signUpDto.getPassword()), UserRole.USER.name());
+        User user = User.of(signUpDto.getEmail(), passwordEncoder.encode(signUpDto.getPassword()), UserRole.ROLE_USER.name());
 
         return userRepository.save(user);
     }

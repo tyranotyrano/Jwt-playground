@@ -51,6 +51,8 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .mvcMatchers("/api/v1/users/**").permitAll()
             .mvcMatchers("/api/v1/auth/**").permitAll()
+            .mvcMatchers("/api/v1/simple/**").hasAnyRole("USER", "ADMIN")
+            .mvcMatchers("/api/v1/admin/**").hasRole("ADMIN")
             .anyRequest().authenticated()
             .and()
             .apply(new JwtSecurityConfigurerAdapter(tokenProvider));

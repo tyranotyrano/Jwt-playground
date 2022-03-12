@@ -19,14 +19,15 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 @RequiredArgsConstructor
 public class AuthService {
+    private static final String COMMA = ",";
+
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     public TokenDto authorize(String email, String password) {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,
-                                                                                                          password);
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = authenticationManagerBuilder.getObject()
-                                                                    .authenticate(authenticationToken);
+                                                                    .authenticate(authToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String authorities = getAuthorities(authentication);
 
@@ -36,6 +37,6 @@ public class AuthService {
     private String getAuthorities(Authentication authentication) {
         return authentication.getAuthorities().stream()
                              .map(GrantedAuthority::getAuthority)
-                             .collect(Collectors.joining(","));
+                             .collect(Collectors.joining(COMMA));
     }
 }
