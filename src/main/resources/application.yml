@@ -13,13 +13,13 @@ spring:
       password:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format_sql: true
 jwt:
   header: Authorization
-  secret: jwtsecretkey
+  secret: dHlyYW5vdHlyYW5vLW9obXlnaXJsLWNoaWNrZW4tcGl6emEtc3Rha2Utd2luZS12b2x2by1rb3JlYS1kZXZlbG9wZXItcnVuLWxvdmUtcGVhY2UtcmVjb3JkLXNpbmctdG9nZXRoZXI= # tyranotyrano-ohmygirl-chicken-pizza-stake-wine-volvo-korea-developer-run-love-peace-record-sing-together 을 base64 로 Encoding 한 값
   access-token-validity-in-millisecond: 60000       # 1분
   refresh-token-validity-in-millisecond: 300000  # 5분
 

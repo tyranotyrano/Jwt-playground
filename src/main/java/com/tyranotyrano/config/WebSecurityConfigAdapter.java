@@ -49,6 +49,7 @@ public class WebSecurityConfigAdapter extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
 
         http.authorizeRequests()
+            .mvcMatchers("/api/v1/users/**").permitAll()
             .mvcMatchers("/api/v1/auth/**").permitAll()
             .anyRequest().authenticated()
             .and()
