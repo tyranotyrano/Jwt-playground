@@ -11,12 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tyranotyrano.domain.token.TokenDto;
+import com.tyranotyrano.exception.UnauthorizedException;
 import com.tyranotyrano.jwt.TokenProvider;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class AuthService {
     private static final String COMMA = ",";
@@ -32,6 +33,20 @@ public class AuthService {
         String authorities = getAuthorities(authentication);
 
         return tokenProvider.createToken(authentication.getName(), authorities);
+    }
+
+    public TokenDto reissue(String accessToken, String refreshToken) {
+        if (!tokenProvider.validateToken(refreshToken)) {
+            throw new UnauthorizedException("유효하지 않은 RefreshToken 입니다");
+        }
+
+        Authentication authentication = tokenProvider.getAuthentication(accessToken);
+        String email = (String) authentication.getPrincipal();
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String authorities = getAuthorities(authentication);
+
+        return tokenProvider.createToken(email, authorities);
     }
 
     private String getAuthorities(Authentication authentication) {

@@ -26,4 +26,13 @@ public class AuthController {
         TokenDto tokenDto = authService.authorize(loginDto.getEmail(), loginDto.getPassword());
         return ResponseEntity.ok(tokenDto);
     }
+
+    /**
+     * AccessToken 이 만료되었을 때 토큰(AccessToken , RefreshToken)재발급해주는 메서드
+     */
+    @PostMapping("/reissue")
+    public ResponseEntity<TokenDto> reissue(@RequestBody TokenDto requestTokenDto) {
+        TokenDto tokenDto = authService.reissue(requestTokenDto.getAccessToken(), requestTokenDto.getRefreshToken());
+        return ResponseEntity.ok(tokenDto);
+    }
 }
