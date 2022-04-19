@@ -1,5 +1,8 @@
 package com.tyranotyrano.exception;
 
+import lombok.Getter;
+
+@Getter
 public class RestException extends RuntimeException {
     private String code;
 
