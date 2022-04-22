@@ -24,7 +24,11 @@ jwt:
   access-token-validity-in-millisecond: 60000       # 1분
   refresh-token-validity-in-millisecond: 300000  # 5분
 
+# 콘솔에 출력되는 JPA SQL 중 "?" 에 들어간 파라미터값 로그 출력
 logging:
   level:
-    root: debug
-    org.hibernate.SQL: debug
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
