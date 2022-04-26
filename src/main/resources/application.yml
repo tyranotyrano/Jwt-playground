@@ -18,6 +18,8 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQL57Dialect
+  flyway:
+    enabled: false
 jwt:
   header: Authorization
   secret: dHlyYW5vdHlyYW5vLW9obXlnaXJsLWNoaWNrZW4tcGl6emEtc3Rha2Utd2luZS12b2x2by1rb3JlYS1kZXZlbG9wZXItcnVuLWxvdmUtcGVhY2UtcmVjb3JkLXNpbmctdG9nZXRoZXI= # tyranotyrano-ohmygirl-chicken-pizza-stake-wine-volvo-korea-developer-run-love-peace-record-sing-together 을 base64 로 Encoding 한 값
